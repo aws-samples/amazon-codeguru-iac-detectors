@@ -1,4 +1,4 @@
-## Amazon CodeGuru Reviewer Java Detector Examples
+## Amazon CodeGuru Reviewer IaC (CloudFormation, Terraform) Detector Examples
 
 Amazon CodeGuru Reviewer is an AWS service that uses program analysis and machine learning to detect potential defects that are difficult for developers to find and offers suggestions for improvement. 
 
