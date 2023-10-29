@@ -1,0 +1,1 @@
+checkovRuleId : CKV_AWS_34

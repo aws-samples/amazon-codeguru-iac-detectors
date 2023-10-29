@@ -1,0 +1,24 @@
+#  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#  SPDX-License-Identifier: Apache-2.0
+
+# {fact rule=unencrypted-redshift-cmk-cloudformation@v1.0 defects=1}
+Resources:
+  Resource:
+    Type: AWS::Redshift::Cluster
+    Properties:
+      AllowVersionUpgrade: !Ref AllowVersionUpgrade
+      AutomatedSnapshotRetentionPeriod: !Ref BackupRetentionPeriod
+      ClusterParameterGroupName: !Ref ClusterParameterGroup
+      ClusterSubnetGroupName: !Ref ClusterSubnetGroup
+      ClusterType: !Ref ClusterType
+      PubliclyAccessible: false
+      DBName:
+        !If
+        - AutoDBName
+        - !GetAtt AWSSBInjectedGenerateDBName.DBName
+        - !Ref DBName
+      # Noncompliant: all data stored in the Redshift cluster is not encrypted at rest.
+      Encrypted: false
+      LoggingProperties:
+        BucketName: "your_bucket"
+# {/fact}
