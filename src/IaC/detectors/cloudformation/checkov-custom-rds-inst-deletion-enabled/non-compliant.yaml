@@ -1,7 +1,7 @@
 #  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 #  SPDX-License-Identifier: Apache-2.0
 
-# {fact rule=checkov-custom-rds-inst-deletion-enabled@v1.0 defects=0}
+# {fact rule=checkov-custom-rds-inst-deletion-enabled@v1.0 defects=1}
 Resources:
       ExampleRDS:
         Type: "AWS::RDS::DBInstance"
