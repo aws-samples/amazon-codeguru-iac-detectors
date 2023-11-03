@@ -1,0 +1,17 @@
+#  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#  SPDX-License-Identifier: Apache-2.0
+
+# {fact rule=checkov-custom-rds-auto-versn-up-enabled@v1.0 defects=1}
+Resources:
+      ExampleRDS:
+        Type: AWS::RDS::DBInstance
+        Properties:
+          DBInstanceClass: !Ref DBInstanceType
+          SourceDBInstanceIdentifier: !Ref SourceDBInstanceIdentifier
+          SourceRegion: !Ref SourceRegion
+          KmsKeyId: !Ref MyKey
+          MonitoringInterval: 1
+          MultiAZ: true
+          StorageEncrypted: true
+          # Noncompliant: `AutoMinorVersionUpgrade` is not defined
+# {/fact}
