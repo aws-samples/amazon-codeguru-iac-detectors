@@ -1,0 +1,23 @@
+#  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#  SPDX-License-Identifier: Apache-2.0
+
+# {fact rule=checkov-custom-redshift-maintenance@v1.0 defects=1}
+Resources:
+  TestCluster:
+    Type: AWS::Redshift::Cluster
+    Properties:
+      ClusterType: multi-node
+      DBName: dev
+      MasterUsername:
+      MasterUserPassword:
+      NodeType:
+      NumberOfNodes: 2
+      # Noncompliant: Amazon Redshift clusters don't have the specified maintenance settings.
+      AllowVersionUpgrade: true
+      AutomatedSnapshotRetentionPeriod: 2
+      PubliclyAccessible: false
+      LoggingProperties:
+        BucketName: "your_bucket"
+      ClusterSubnetGroupName: "subnet-ebd9cead"
+      Encrypted: true
+# {/fact}
