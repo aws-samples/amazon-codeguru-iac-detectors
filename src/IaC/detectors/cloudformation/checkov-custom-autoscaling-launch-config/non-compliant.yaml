@@ -1,0 +1,18 @@
+#  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#  SPDX-License-Identifier: Apache-2.0
+
+# {fact rule=checkov-custom-autoscaling-launch-config@v1.0 defects=1}
+Resources:
+  LaunchConfig:
+    Type: AWS::AutoScaling::LaunchConfiguration
+    Metadata:
+      Comment: Install a simple application
+    Properties:
+      # Noncompliant: `AssociatePublicIpAddress` is set to true or doesn't exist.
+      KeyName: !Ref 'KeyName'
+      ImageId: !FindInMap [AWSRegionArch2AMI, !Ref 'AWS::Region', !FindInMap [AWSInstanceType2Arch,
+          !Ref 'InstanceType', Arch]]
+      SecurityGroups: [!Ref 'InstanceSecurityGroup']
+      InstanceType: !Ref 'InstanceType'
+      UserData: !Base64
+# {/fact}
