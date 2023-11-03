@@ -1,0 +1,15 @@
+#  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#  SPDX-License-Identifier: Apache-2.0
+
+# {fact rule=checkov-custom-ecs-task-definition@v1.0 defects=0}
+Resources:
+      TaskDefinition:
+        Type: AWS::ECS::TaskDefinition
+        Properties:
+          NetworkMode: host
+          ContainerDefinitions:
+            Name: ContainerB
+            User: root
+            # Compliant: Amazon ECS task definition has privileged set to true
+            Privileged: true
+# {/fact}
