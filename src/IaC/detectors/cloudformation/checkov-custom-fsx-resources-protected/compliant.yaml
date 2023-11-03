@@ -1,0 +1,18 @@
+#  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#  SPDX-License-Identifier: Apache-2.0
+
+# {fact rule=checkov-custom-fsx-resources-protected@v1.0 defects=0}
+Resources:
+      FileSystem:
+        Type: AWS::FSx::FileSystem
+        Properties:
+          FileSystemType: "OPENZFS"
+          FileSystemTypeVersion: "2.12"
+          StorageCapacity: 1200
+          SubnetIds: [!ImportValue MySubnet01]
+          SecurityGroupIds: [!ImportValue LustreIngressSecurityGroupId]
+          OpenZFSConfiguration:
+          # Compliant: `AutomaticBackupRetentionDays` not set to zero
+            AutomaticBackupRetentionDays: 30
+            DeploymentType: SINGLE_AZ_1
+# {/fact}
