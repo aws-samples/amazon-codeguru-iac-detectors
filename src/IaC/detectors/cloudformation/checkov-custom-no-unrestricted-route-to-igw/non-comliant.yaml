@@ -1,0 +1,15 @@
+#  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#  SPDX-License-Identifier: Apache-2.0
+
+# {fact rule=checkov-custom-no-unrestricted-route-to-igw@v1.0 defects=1}
+Resources:
+  PublicRoute:
+    Type: "AWS::EC2::Route"
+    DependsOn: "GatewayToInternet"
+    Properties:
+    # NonCompliant: 'DestinationCidrBlock' is not configured.
+      RouteTableId:
+        Ref: "PublicRouteTable"
+      GatewayId:
+        Ref: "InternetGateway"
+# {/fact}
