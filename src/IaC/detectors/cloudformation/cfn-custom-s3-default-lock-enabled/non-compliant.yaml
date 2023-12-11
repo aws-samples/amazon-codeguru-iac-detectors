@@ -1,0 +1,24 @@
+#  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#  SPDX-License-Identifier: Apache-2.0
+
+# {fact rule=cfn-custom-s3-default-lock-enabled@v1.0 defects=1}
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: private
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+       # Noncompliant: `ObjectLockEnabled` is set to false 
+      ObjectLockEnabled: false
+      LoggingConfiguration: enabled
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      VersioningConfiguration:
+        Status: Enabled
+    DeletionPolicy: Retain
+# {/fact}

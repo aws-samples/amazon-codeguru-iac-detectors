@@ -1,0 +1,17 @@
+#  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#  SPDX-License-Identifier: Apache-2.0
+
+# {fact rule=cfn-custom-eks-endpoint-public-access@v1.0 defects=0}
+Resources:
+  ExampleEKSCluster:
+    Type: "AWS::EKS::Cluster"
+    Properties:
+      ResourcesVpcConfig:
+        SubnetIds: !Ref SubnetIds
+        # Compliant: `EndpointPublicAccess` is set to `false`.
+        EndpointPublicAccess: false
+      RoleArn: !Ref RoleArn
+      EncryptionConfig:
+        - Resources:
+            - secrets
+# {/fact}
