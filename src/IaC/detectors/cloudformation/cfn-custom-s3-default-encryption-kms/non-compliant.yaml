@@ -1,0 +1,24 @@
+#  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#  SPDX-License-Identifier: Apache-2.0
+
+# {fact rule=cfn-custom-s3-default-encryption-kms@v1.0 defects=1}
+Resources:
+  BadS3DefaultEncryptionKMS:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: my-bucket
+      VersioningConfiguration:
+        Status: Enabled
+      PublicAccessBlockConfiguration:
+        RestrictPublicBuckets: true
+        IgnorePublicAcls: true
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+      LoggingConfiguration:
+        DestinationBucketName: String
+        LogFilePrefix: String
+      AccessControl: LogDeliveryWrite
+      # Noncompliant: `BucketEncryption` is not enabled.
+      MetricsConfigurations:
+        - Id: BucketMetrics
+# {/fact}

@@ -1,0 +1,13 @@
+#  Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+#  SPDX-License-Identifier: Apache-2.0
+
+# {fact rule=cfn-custom-ebs-optimized-instance@v1.0 defects=0}
+Resources:
+  ExampleEC2:
+    Type: AWS::EC2::Instance
+    Properties:
+      ImageId: !Ref LatestAmiId
+      InstanceType: !Ref pInstanceType
+      # Compliant: `EbsOptimized` is set to `true`.
+      EbsOptimized: true
+# {/fact}
